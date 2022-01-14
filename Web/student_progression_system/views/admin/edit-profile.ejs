@@ -1,0 +1,147 @@
+<%- include('../partials/header.ejs') %> 
+<div class="container-fluid px-4"> 
+<br>
+<nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item" style="cursor:pointer;"><a href="/admin/profile ">My Profile</a></li>
+      <li class="breadcrumb-item " aria-current="page">Edit Profile</li>          
+    </ol>
+  </nav>
+
+  <div class="row">    
+    <div class="col-xl-4">
+        <!-- Profile picture card-->
+        <div class="card mb-4 mb-xl-0">
+            <div class="card-header">Profile Picture</div>
+            <div class="card-body text-center">                              
+                <% if(user.user_profile_image_link==null) {%> 
+                    <% if(user.user_gender=="Male") {%> 
+                <!-- Profile picture image-->
+                <img class="img-account-profile rounded-circle mb-1" src="/assets/img/profile_male.svg" alt="Profile Picture" width="140px" height="140px">
+                <% } else{ %>
+                    <img class="img-account-profile rounded-circle mb-1" src="/assets/img/profile_female.svg" alt="Profile Picture" width="140px" height="140px">
+                <% } %> 
+                <!-- Profile picture message if none exist--> 
+                    <div class="small font-italic text-muted mb-4">
+                        No profile image link found!
+                        Edit User to Upload a profile image.
+                    </div>
+                <% } else{ %>
+                    <img class="img-account-profile rounded-circle mb-1" src="<%= user.user_profile_image_link%> " alt="Profile Picture" width="140px" height="140px">
+                    <div class="small font-italic text-muted mb-4">
+                        Upload new profile picture
+
+                    </div>
+                
+                <% } %> 
+
+            </div>
+            
+        </div>
+        <br>
+        <div class="card mb-4 mb-xl-0" style="background:transparent;">
+            <form action="/admin/files/profile/upload-image/<%= userInfo.uuid %>" method="post" enctype="multipart/form-data" >   
+                <div class="mb-3">     
+                  <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
+                  <input type="hidden" name="userUUID" id="userUUID" value="<%= user.uuid %> ">
+                  <input type="hidden" name="photoURL" id="photoURL" >                  
+                  <input type="file"  class="form-control"  name="selectedImage" id="selectedImage">
+                </div>                                       
+                <p class="h6" id="uploadStatus" style="display: none">Loading...</p>
+                <button type="submit" id="uploadImage" class="btn btn-primary">Upload Image</button>
+              </form> 
+            
+        </div>
+        <br>
+        <div class="card mb-4 mb-xl-0" style="background:transparent;">
+            <a href="/admin/change-password/<%= userInfo.uuid %> "  class="btn btn-primary" type="button"><i class="fas fa-key" ></i> Change Password </a>
+        </div>
+
+        
+        
+    </div>
+    <div class="col-xl-8">
+        <!-- Account details card-->
+        <div class="card mb-4">
+            <div class="card-header"><%= user.first_name %>'s Profile Details</div>
+            <div class="card-body">
+                <form action="/admin/edit-profile/<%= userInfo.uuid %>" method="post">                                      
+                    <!-- Form Row-->
+                    <div class="row gx-3 mb-3">
+                        <!-- Form Group (first name)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="inputFirstName">First name</label>
+                            <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" name="first_name" value="<%= userInfo.first_name %> "/>
+                            <style type="text/css">
+                                input[name=first_name] {
+                                  pointer-events: none;
+                                 }
+                                input[name=last_name] {
+                                  pointer-events: none;
+                                 }
+                                input[name=user_gender] {
+                                  pointer-events: none;
+                                 }
+                               </style>
+                        </div>
+                        <!-- Form Group (last name)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="inputLastName">Last name</label>
+                            <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" name="last_name" value="<%= userInfo.last_name %>">
+                        </div>
+                    </div>
+                    <!-- Form Row        -->
+                    <div class="row gx-3 mb-3">
+                        <!-- Form Group (other name)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="inputOtherNames">Other name(s)</label>
+                            <input class="form-control" id="inputOtherNames" type="text" placeholder="Enter your other name(s)" name="other_names" >
+                        </div>
+                        <!-- Form Group (location)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="inputLocation">Gender</label>
+                            <input class="form-control" list="gender" id="userGender" type="text" placeholder="Select your gender" name="user_gender" value="<%= userInfo.user_gender %>">
+                            <datalist id="gender">
+                                <option>Male</option>
+                                <option>Female</option>                                                                                    
+                                <option>Other</option>                                                                                    
+                            </datalist>
+                        </div>
+                    </div>
+                                                          
+
+                    <!-- Form Row-->
+                    <div class="row gx-3 mb-3">
+                        <!-- Form Group (phone number)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="inputLocation">Phone Number</label>
+                            <input class="form-control" id="phoneNumber" type="tel"  name="phone_number" value="<%= userInfo.phone_number %>">
+                        </div>
+                        <!-- Form Group (birthday)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="inputBirthday">Birthday</label>                      
+                            <input class="form-control" id="inputBirthday" type="date" name="birthday" placeholder="Enter your birthday" value="<%= userInfo.birthday %>">
+
+                        </div>
+                         <!-- Form Group (imge url address)-->
+                      <div class="mb-3">
+                        <label class="small mb-1" for="inputUrl"> Image URL</label>
+                        <input class="form-control" id="inputUrl" type="text" placeholder="Enter image url" name="profile_url">
+                    </div>  
+                        
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <input type="hidden" id="send" name="sent_number"/> 
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update my profile details</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div>        
+    </div>
+</div>
+  </div>
+
+
+
+<%- include('../partials/footer.ejs') %> 

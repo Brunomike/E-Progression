@@ -1,0 +1,122 @@
+<%- include('../partials/header.ejs') %> 
+<%- include('../partials/date.ejs') %> 
+<div class="container-fluid px-4"> 
+    <br>
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <h4>Upload  News</h4>
+          </button>
+        </h2>
+
+        <!-- Add New news  -->
+        <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">            
+            <div class="card">
+              <div class="card-body">
+                  <form action="/admin/news-upload" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                      <div id="sample">
+                          
+                          <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script> 
+                          <script type="text/javascript">
+                         
+                             bkLib.onDomLoaded(function() {
+                                  var myNicEditor = new nicEditor();
+                                  myNicEditor.setPanel('myNicPanel');
+                                  myNicEditor.addInstance('myInstance1');
+                                  myNicEditor.addInstance('myInstance2');
+                                  myNicEditor.addInstance('myInstance3');
+                             });
+                          </script> 
+                          <div id="myNicPanel" ></div>
+                          <br>
+                          <div class="mb-3">
+                              <label class="small mb-1" for="myInstance1"><h5>Title</h5></label>
+                              <input type="text" class="form-control" name="news_title" id="myInstance1" required>
+                              <div class="valid-feedback">
+                                ✔
+                                </div>
+                              <div class="invalid-feedback">
+                                  Enter news title!
+                                </div>
+                          </div>
+                          <div class="mb-3">
+                              <label class="small mb-1" for="myInstance2"><h5>Sub Title</h5></label>
+                              <input type="text" class="form-control" name="news_sub_title" id="myInstance2" required>
+                              <div class="valid-feedback">
+                                ✔
+                                </div>
+                              <div class="invalid-feedback">
+                                  Enter news sub title!
+                                </div>
+                          </div>
+      
+                          <div class="mb-3">
+                              <label class="small mb-1" for="myInstance3"><h5>News Content</h5></label>
+                              <textarea class="form-control" placeholder="Type the news content here" name="news_content"  id="floatingTextarea" required>Type the news content here</textarea>
+                              <div class="valid-feedback">
+                                ✔
+                                </div>
+                              <div class="invalid-feedback">
+                                  Enter news content!
+                                </div>
+                              <!-- id="myInstance3" -->
+                          </div>
+                          <div class="row gy-3">
+                            <div class="col-6">                              
+                                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="news_category" required>
+                                  <option selected>Select news Category</option>
+                                  <option value="Academics">Acedemics </option>
+                                  <option value="Events">Events</option>
+                                </select>   
+                                <div class="valid-feedback">
+                                  ✔
+                                  </div>
+                                <div class="invalid-feedback">
+                                   Select type of news category!
+                                  </div>                           
+                            </div>
+                            <!-- Upload news image if available -->
+                            <!-- <div class="col-6">                                                
+                              <input type="file" multiple  class="form-control"  name="selectedImage">
+                            </div> -->
+                          </div>                   
+                          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        </div>                                              
+                      <br>
+                    <button type="submit" class="btn btn-primary">Upload News</button>
+                      </form>
+                    </div>
+              </div>
+          </div>
+        </div>
+                
+      </div>
+    
+    </div>
+    <br>    
+    <!-- Dislay Existing News  -->
+    <% if(news.length>0){ %>
+      <div class="wrapper">
+        <% for(let i=0;i<news.length;i++) {%> 
+        <div class="news">
+          <div class="news__card">
+          <a href="/admin/news-item/<%= news[i].id %>" class="news__item">
+            <img src="/assets/img/logo.png"
+              width="100px"
+              height="100px"
+             alt="<%= news[i].news_category %>">
+            <h4><%= news[i].news_title %>  </h4>
+            <p><%= news[i].news_sub_title %></p>                        
+          </a>         
+          <a href="/admin/delete-news/<%= news[i].id %> " class="deleteIcon"><i class="bi bi-trash-fill btnDelete deleteIcon" ></i></a>
+        </div>
+        </div>
+        <% } %> 
+      </div>
+    <% } %> 
+     <br>    
+</div>
+<!-- https://nicedit.com/ -->
+<%- include('../partials/footer.ejs') %> 

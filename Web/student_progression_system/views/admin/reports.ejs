@@ -1,0 +1,46 @@
+<%- include('../partials/header.ejs') %> 
+<%- include('../partials/date.ejs') %> 
+<div class="container-fluid px-4" style="margin-top: 20px;">
+    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+
+    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"   data-bs-toggle="modal" data-bs-target="#adminSendResults" data-bs-whatever="@mdo"><i class="fas fa-download fa-sm text-white"></i> Send Exam Results</a>
+
+     <!--Add Finance Records -->
+ <div class="modal fade" id="adminSendResults" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Available Exams</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">                                  
+          <form action="/admin/send-results" method="post" class="needs-validation" novalidate>
+              <div class="container overflow-hidden">                                                                                                                                                                                                                                                                                                              
+                <div class="input-group mb-3">
+                  <label class="input-group-text" for="inputGroupSelect01">Choose Exam</label>
+                  <select class="form-select" id="inputGroupSelect01" name="selectedItem">
+                    <option value="Select Exam to Send">Select Exam to Send</option>
+                    <%for(let i=0;i<examTypes.length;i++){%>                                  
+                        <option value="<%=examTypes[i].exam_name%>"><%=examTypes[i].exam_name%></option>                                  
+                        <%}%>
+                    
+                  </select>
+                </div>
+                    </div>                    
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">  
+                </div> 
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Send Results</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>                                    
+                </div>                                                                                       
+          </form>
+        </div>
+       
+      </div>
+    </div>
+
+
+
+</div>
+
+<%- include('../partials/footer.ejs') %> 

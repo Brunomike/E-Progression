@@ -1,0 +1,127 @@
+<%- include('../partials/header.ejs') %> 
+<%- include('../partials/date.ejs') %> 
+<div class="container-fluid px-4"> 
+    <br>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+            Exam Results Management Instructions
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body" style="display: grid; grid-template-columns: 1fr 1fr;grid-gap: 10px;">
+              <div>
+                <img src="/assets/img/exam.png" alt="" width="500">
+              </div>
+              <div>
+              <p>After uploading an excel through the <code>File Management </code> with the specified format as shown with this image,
+                the administrator is provided with functionality to upload the exam results from the excel file to the
+                database which after approval can be viewed in the parent android application and sent as SMS messages
+                to parents who do not have accounts in the parent application.</p>
+                <p><strong>NOTE</strong></p>
+                <ul>
+                  <li>The status must explicitly be set to pending otherwise the results will be visible to parents, while there may be cases where other students results are not ready.</li>
+                  <li>Each result should have an exam which has been explicitly added as an exam type.</li>
+                  <li>Results should only be set for existing students,otherwise you need to add the new student before entering their results.</li>
+                </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Add New Exam Results
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+          <div class="accordion-body"> 
+            <div class="row gx-0">
+              <div class="col-6">
+                <form action="/admin/exam-type" method="post" class="needs-validation" novalidate>
+                  <div class="col-8">
+                    <!-- <label for="examType" class="form-label">Exam Type</label> -->
+                    <input type="text" class="form-control" id="examType" placeholder="Exam Type"  name="exam_name" required >
+                    <div class="valid-feedback">
+                      ✔
+                      </div>
+                      <div class="invalid-feedback">
+                        Enter Exam Type
+                      </div>
+                  </div>
+                  <br>
+                  <div class="col-8">
+                    <!-- <label for="examDescription" class="form-label">Exam Description</label> -->
+                    <input type="text" class="form-control" id="examDescription" placeholder="Exam Description"  name="exam_description" required >
+                    <div class="valid-feedback">
+                      ✔
+                      </div>
+                      <div class="invalid-feedback">
+                        Enter Exam Description
+                      </div>
+                  </div>          
+                  <br>
+                  <div class="col-6">
+                    <div class="p-1   fields"> <label for="startDate" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="startDate" name="exam_start_date">
+                        <div class="valid-feedback">
+                          ✔
+                          </div>
+                        <div class="invalid-feedback">
+                            Please Select the exam start date!
+                          </div>
+                    </div>
+                  </div>
+                  <br>
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <button type="submit" class="btn btn-primary" >Add Exam Type</button>          
+                </form>
+              </div> 
+              <div class="col-6">
+              <form action="/admin/academics" method="post" class="needs-validation" novalidate>
+            <div class="col-8">
+            <div class="input-group ">
+                <label class="input-group-text" for="inputGroupSelect01">Exam Type</label>
+                <select class="form-select" id="inputGroupSelect01" name="selectedExamType">
+                <option selected>Select Exam Type</option>
+                <%for(let i=0;i<examTypes.length;i++){%>                                  
+                    <option value="<%=examTypes[i].exam_name%>"><%=examTypes[i].exam_name%></option>                                  
+                    <%}%>
+                    <option value="none">None</option>
+                </select>
+            </div>
+            </div>
+            <br>
+            <div class="col-8">
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">Choose File</label>
+                <select class="form-select" id="inputGroupSelect01" name="selectedFileItem">
+                  <option value="1">Select a File</option>
+                  <%for(let i=0;i<files.length;i++){%>                                  
+                  <option value="<%=files[i]%>"><%=files[i]%></option>                                                    
+                  <%}%>                  
+                </select>                                
+              </div>
+            </div>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">  
+            <br>
+            <button type="submit" class="btn btn-primary" >Add New Exam Results</button>
+        </form>         
+           </div>
+       
+      </div>
+          </div>
+        </div>
+      </div>
+      <br>
+    
+    
+    
+    
+    <br>
+    </div>
+
+
+<%- include('../partials/footer.ejs') %> 

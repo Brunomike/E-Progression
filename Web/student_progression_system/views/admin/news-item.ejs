@@ -1,0 +1,25 @@
+<%- include('../partials/header.ejs') %> 
+<div class="container-fluid px-4"> 
+    <br>
+    <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item" style="cursor:pointer;"><a href="/admin/news-management">News Manamagent</a></li>
+          <li class="breadcrumb-item " aria-current="page">View News</li>          
+        </ol>
+      </nav>
+      <div class="card">
+          <div class="card-header">
+            <%= news.news_title %> 
+            <br>
+            <%= news.news_sub_title %> 
+          </div>
+          <div class="card-body">
+            <%= news.news_content %> 
+          </div>
+          <div class="card-footer">
+            <%= news.createdAt %> 
+          </div>
+      </div>
+</div>
+
+<%- include('../partials/footer.ejs') %> 

@@ -1,0 +1,140 @@
+<%- include('../partials/header.ejs') %> 
+<div class="container-fluid px-4"> 
+    <br>
+    <div class="row">    
+        <div class="col-xl-4">
+            <!-- Profile picture card-->
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header">Profile Picture</div>
+                <div class="card-body text-center">                              
+                    <% if(user.user_profile_image_link==null) {%> 
+                        <% if(user.user_gender=="Male") {%> 
+                    <!-- Profile picture image-->
+                    <img class="img-account-profile rounded-circle mb-1" src="/assets/img/profile_male.svg" alt="Profile Picture" width="140px" height="140px">
+                    <% } else{ %>
+                        <img class="img-account-profile rounded-circle mb-1" src="/assets/img/profile_female.svg" alt="Profile Picture" width="140px" height="140px">
+                    <% } %> 
+                    <!-- Profile picture message if none exist--> 
+                        <div class="small font-italic text-muted mb-4">
+                            No profile image link found!
+                            Edit User to Upload a profile image.
+                        </div>
+                    <% } else{ %>
+                        <img class="img-account-profile rounded-circle mb-1" src="<%= user.user_profile_image_link%> " alt="Profile Picture" width="140px" height="140px">
+                        <div class="small font-italic text-muted mb-4"><%= `${userInfo.first_name} ${userInfo.last_name}` %> </div>
+                    <% } %> 
+    
+                </div>
+                
+            </div>
+            <br>
+            <div class="card mb-4 mb-xl-0" style="background:transparent;">
+                <a href="/admin/edit-profile/<%= user.uuid%> "  class="btn btn-primary" type="button"><i class="fas fa-edit" ></i> Edit Profile</a>
+            </div>            
+    
+            
+            
+        </div>
+        <div class="col-xl-8">
+            <!-- Account details -->
+            <div class="card mb-4">
+                <div class="card-header"><%= user.first_name %> <%= user.last_name %>'s Profile</div>
+                <div class="card-body">
+                    <form>                                      
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputFirstName">First name</label>
+                                <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" value="<%=user.first_name%>"/>
+                            </div>
+                            <!-- Form Group (last name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLastName">Last name</label>
+                                <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" value="<%=user.last_name%>">
+                            </div>
+                        </div>
+                        <!-- Form Row        -->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (other name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputOrgName">Other name(s)</label>
+                                <input class="form-control" id="inputOrgName" type="text"  value="<%=user.other_names%>">
+                            </div>
+                            <!-- Form Group (location)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLocation">Gender</label>
+                                <input class="form-control" id="userGender" type="text" placeholder="Enter your location" value="<%= user.user_gender %> ">
+                            </div>
+                        </div>
+                        <!-- Form Row        -->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (user status)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputOrgName">User Status</label>
+                                <input class="form-control" id="inputOrgName" type="text"  value="<%=user.user_status%>">
+                            </div>
+                            <!-- Form Group (user role)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLocation">User Role</label>
+                                <input class="form-control" id="userRole" type="text" placeholder="Enter your location" value="<%= user.user_role %> ">
+                            </div>
+                        </div>
+                          <!-- Form Group (email address)-->
+                          <div class="mb-3">
+                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                            <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="<%= user.email_address %> ">
+                        </div>                   
+    
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLocation">Phone Number</label>
+                                <input class="form-control" id="phoneNumber" type="tel" placeholder="Enter your phone number" value="<%= user.phone_number %> ">
+                            </div>
+                            <!-- Form Group (birthday)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputBirthday">Birthday</label>
+                                <% let dateString = user.year_of_birth%> 
+                                <%function getDate(dateString){%>
+                                    <%  let dateStr = dateString%>
+                                    <%let d=new Date(dateStr).toISOString()%>
+                                    <%let n=d.split("T")%>
+                                    <%let date=n[0]%>
+                                    <%return date%>
+                                    <%}%>                                
+                                
+                                <%function calculateAge(dob){%>
+                                   <% var dob = new Date(dob); %>                                 
+                                   <% var month_diff = Date.now() - dob.getTime();%>
+                                   <% var age_dt = new Date(month_diff);%>                                                         
+                                   <% var year = age_dt.getUTCFullYear(); %>                                                                    
+                                   <% var age = Math.abs(year - 1970); %>                                                                                              
+                                   <% return age;%>
+                                <% } %>  
+                                <% function getFormat(date){ %> 
+                                    <% let stringDateDivided=date.split("-") %> 
+                                    <%let message= stringDateDivided%> 
+                                    <% console.log(stringDateDivided) %> 
+                                    <% let d=parseInt(stringDateDivided[2]) %> 
+                                    <% let re=`${d}/${stringDateDivided[1]}/${stringDateDivided[0]}` %> 
+                                    <% return re%> 
+                                <%  } %>                              
+                                <% let ex1=getDate(dateString) %> 
+                                <% let dob= getFormat(ex1)%> 
+                                <input class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="Enter your birthday" value="<%=dob%>">
+    
+                            </div>
+                        </div>
+    
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div>        
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %> 

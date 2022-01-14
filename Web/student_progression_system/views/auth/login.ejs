@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Progression</title>
+    <link rel="icon" type="image/png" sizes="256x256" href="/assets/img/logo.png">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" href="/css/login.css" />
+  </head>
+  <body>
+    <% if(msgSuccessLogin.length>0){ %>
+      
+      <div class="alert alert-success" role="alert">
+        <%= msgSuccessLogin %> 
+      </div>
+  <% } %>
+  <% if(msgFailureLogin.length>0){ %>
+    
+    <div class="alert alert-danger" role="alert">
+      <%= msgFailureLogin %> 
+    </div>
+  <% } %>
+    <div class="container" id="container">
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-panel overlay-right">
+            <img
+              src="/assets/img/logo.png"
+              alt="Logo"
+              width="400px"
+              height="400px"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-container log-in-container">
+
+        <form
+          action="/auth/login"
+          method="post"
+          class="login-form needs-validation"
+          novalidate
+        >
+        <h1>Login</h1>
+        <br>
+          <div class="mb-3">
+            <label for="emailAddress" class="form-label">Email address</label>
+            <input
+              type="email"
+              class="form-control"
+              id="emailAddress"
+              name="email_address"
+              required
+            />
+            <div class="valid-feedback">✔</div>
+            <div class="invalid-feedback">Enter your Email Address!</div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group">
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              aria-describedby="basic-addon2"
+              required              
+            />
+            <span class="input-group-text" id="basic-addon2" style="height:38px; align-items: end; margin-top:8px; cursor: pointer;"><i class="bi bi-eye-slash" id="togglePassword"></i></span>
+          </div>
+            <!-- <i class="bi bi-eye-slash" id="togglePassword"></i> -->
+ 
+            <div class="invalid-feedback">Enter your password!</div>
+            <div class="valid-feedback">✔</div>
+          </div>
+  
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <a href="/auth/forgot-password" id="resetPass">Forgot password?</a>
+
+          <button type="submit" class="btn btn-primary">Sign In</button>
+          <br />                               
+            <a href="/auth/registration" id="signup">Need an account? Sign Up</a>          
+        </form>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <script src="/js/form-validation.js"></script> -->
+    <script src="/js/login.js"></script>
+  </body>
+</html>

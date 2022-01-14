@@ -1,0 +1,106 @@
+<%- include('../partials/header.ejs') %> 
+<%- include('../partials/date.ejs') %> 
+<div class="container-fluid px-4">                        
+    <h1 class="mt-4">E-Progression</h1>
+    <!-- <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item ">Welcome to E-Progression System Admin Panel.You will be availed with administrator functionalities to manage the system as a whole.</li>        
+        <li class="breadcrumb">Follow the instructions in the provided link to learn how to manage the system. <a href="">User Manual</a></li>
+    </ol>     -->    
+
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="me-3">
+                            <div class="text-white-75 fw-bold"><h6>Exams Done</h6></div>
+                            <div class="text-lg small">Count <span><%= `:${examsDone}` %> </span></div>
+                            <div class="text-lg small">Latest <span><%= ` :${latestExam}` %> </span></div>
+                        </div>
+                        <span ><i class="fab fa-servicestack " style="width:50px;height:50px;"></i></span>
+                    </div>
+                   
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="/admin/academics">
+                        Add New Results
+                    </a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-secondary text-white mb-4 bg-opacity-90">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="me-3">
+                            <div class="text-white-75 fw-bold"><h6>Fee Payment</h6></div>
+                            <div class="text-lg small">Transactions <span><%= `:${totalTransactions}` %> </span></div>
+                            <div class="text-lg small">Balance <span><%= ` :${totalBalance}` %> </span></div>
+                        </div>
+                        <span ><i class="fas fa-money-bill-alt " style="width:50px;height:50px;"></i></span>
+                    </div>
+                   
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="/admin/finances">
+                        Add New Records
+                    </a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="me-3">
+                            <div class="text-white-75 fw-bold"><h6>Latest News</h6></div>                            
+                            <div class="text-lg small">Academics <span><%= ` :${academics}` %> </span></div>
+                            <div class="text-lg small">Events <span><%= ` :${events}` %> </span></div>
+                        </div>
+                        <span ><i class="fas fa-newspaper" style="width:50px;height:50px;"></i></span>
+                            
+                    </div>
+                   
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="/admin/news-management">
+                        View News
+                    </a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-danger text-white mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="me-3">
+                            <div class="text-white-75 fw-bold"><h6>Registered Users</h6></div>
+                            <div class="text-lg small">Admins <span><%= `:${admins}` %> </span></div>
+                            <div class="text-lg small">Parents <span><%= ` :${parents}` %> </span></div>
+                        </div>
+                        <span ><i class="fas fa-users " style="width:50px;height:50px;"></i></span>
+                    </div>
+                   
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="/admin/user-management">
+                        View Users
+                    </a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+
+        
+        
+    </div>
+    
+    
+
+
+<%- include('../partials/footer.ejs') %> 

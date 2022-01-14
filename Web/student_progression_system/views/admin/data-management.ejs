@@ -1,0 +1,488 @@
+<%- include('../partials/header.ejs') %> 
+<%- include('../partials/date.ejs') %> 
+<div class="container-fluid px-4" style="margin-top: 20px;">
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Bulk Update Instructions
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <p style="margin-left: 10px;">  To update various tables of the database follow the following format in the excel images, to correctly
+            update the respective tables:</p>
+          <div class="accordion-body" style="display: grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr))">
+            <div>
+              <img src="/assets/img/student.png" alt="" class="data-img">
+              <p><code>Students Table</code></p>              
+            </div>          
+
+          <div>
+          <img src="/assets/img/parents.png" alt="" class="data-img">
+            <p><code>Parents Table</code></p>             
+          </div>
+
+          <div>
+            <img src="/assets/img/teachers.png" alt="" class="data-img">
+              <p><code>Teachers Table</code></p>             
+            </div>
+            <div>
+                <img src="/assets/img/subjects.png" alt="" class="data-img">
+                <p><code>Subjects Table</code></p>             
+            </div>
+            <div>
+                <img src="/assets/img/dorms.png" alt="" class="data-img">
+                <p><code>Dorms Table</code></p>             
+            </div>
+         
+          
+    
+        </div>
+        </div>
+      </div>
+      <br>
+
+    <div class="card">
+        <div class="card-header border-bottom">
+    <div class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard" id="cardTab" role="tablist">
+        <!-- Wizard navigation item 1-->
+        <a class="nav-item nav-link active" id="wizard1-tab" href="#wizard1" data-bs-toggle="tab" role="tab" aria-controls="wizard1" aria-selected="true">                                                
+            <!-- <div class="wizard-step-icon"><i class="bi bi-kanban-fill"></i></div> -->
+            <div class="wizard-step-icon"><i class="fas fa-user-shield"></i></div>
+            <div class="wizard-step-text">
+        <div class="wizard-step-text-name">Parents</div>
+        <div class="wizard-step-text-details">Add New Parent</div>
+        </div>                        
+        </a>
+      <!-- Wizard navigation item 2-->
+    <a class="nav-item nav-link" id="wizard2-tab" href="#wizard2" data-bs-toggle="tab" role="tab" aria-controls="wizard2" aria-selected="false">
+    <div class="wizard-step-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+    <div class="wizard-step-text">
+        <div class="wizard-step-text-name">Teachers</div>
+        <div class="wizard-step-text-details">Add new Teacher</div>
+    </div>
+    </a>
+    <a class="nav-item nav-link" id="wizard3-tab" href="#wizard3" data-bs-toggle="tab" role="tab" aria-controls="wizard3" aria-selected="false">
+        <div class="wizard-step-icon"><i class="fas fa-user-graduate"></i></div>
+        <div class="wizard-step-text">
+            <div class="wizard-step-text-name">Students</div>
+            <div class="wizard-step-text-details">Add New Student</div>
+        </div>
+    </a>
+    <!-- <a class="nav-item nav-link" id="wizard3-tab" href="#wizard3" data-bs-toggle="tab" role="tab" aria-controls="wizard3" aria-selected="false">
+        <div class="wizard-step-icon">3</div>
+        <div class="wizard-step-text">
+            <div class="wizard-step-text-name">Subjects</div>
+            <div class="wizard-step-text-details">Add New Subject</div>
+        </div>
+    </a>
+    <a class="nav-item nav-link" id="wizard3-tab" href="#wizard3" data-bs-toggle="tab" role="tab" aria-controls="wizard3" aria-selected="false">
+        <div class="wizard-step-icon">3</div>
+        <div class="wizard-step-text">
+            <div class="wizard-step-text-name">Dorms</div>
+            <div class="wizard-step-text-details">Add New Dorm</div>
+        </div>
+    </a> -->
+    <a class="nav-item nav-link" id="wizard4-tab" href="#wizard4" data-bs-toggle="tab" role="tab" aria-controls="wizard4" aria-selected="false">
+        <div class="wizard-step-icon"><i class="fab fa-bitbucket"></i></div>
+        <div class="wizard-step-text">
+            <div class="wizard-step-text-name">Bulk Update</div>
+            <div class="wizard-step-text-details">Add Multiple</div>
+        </div>
+    </a>
+    </div>
+
+    </div>
+    <div class="card-body">
+        <div class="tab-content" id="cardTabContent">
+            <!-- Wizard tab pane item 1  Add Parent-->
+            <div class="tab-pane py-1 py-xl-10 fade active show" id="wizard1" role="tabpanel" aria-labelledby="wizard1-tab">
+                <form action="/admin/add-parent" method="post" class="needs-validation" novalidate>
+                    <div class="card">
+                        <div class="card-header">
+                            <h1>Add New Parent</h1>
+                        </div>
+                        <div class="card-body">
+                            <div class="row gy-3">
+                            <div class="col-6">
+                                <div class="p-1   fields">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="First Name"  name="first_name" required>
+                                    <div class="valid-feedback">
+                                        ✔
+                                        </div>
+                                        <div class="invalid-feedback">
+                                        Enter First Name
+                                        </div>
+                                </div>
+                                </div>
+                                <div class="col-6">
+                                <div class="p-1  fields">
+                                    <label for="phoneNumber" class="form-label">Phone Number</label><br>
+                                    <input type="tel" class="form-control" id="phoneNumber"  name="phone_number" required style="width:200px">
+                                    <div class="valid-feedback">
+                                        ✔
+                                        </div>
+                                        <div class="invalid-feedback">
+                                        Enter Phone Number
+                                        </div>
+                                    </div>
+                                </div>                                    
+                                <div class="col-6">
+                                <div class="p-1   fields"><label for="lastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="Last Name"  name="last_name" required>
+                                    <div class="valid-feedback">
+                                        ✔
+                                        </div>
+                                        <div class="invalid-feedback">
+                                        Enter Last Name
+                                        </div>
+                                </div>
+                                </div>                                    
+                                <div class="col-6">
+                                <div class="p-1   fields"> <label for="birthDate" class="form-label">Date of Birth</label>                                      
+                                    <input type="date" class="form-control" id="birthDate" name="year_of_birth">
+                                    <div class="valid-feedback">
+                                        ✔
+                                        </div>
+                                    <div class="invalid-feedback">
+                                        Please Select your birth date!
+                                        </div>
+                                </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-1   fields"><label for="lastName" class="form-label">Other Names</label>
+                                        <input type="text" class="form-control" id="otherName" placeholder="Other Names"  name="other_names">                                        
+                                    </div>
+                                    </div> 
+                                <div class="col-6">
+                                    <div class="p-1   fields">
+                                    <label for="emailAddress" class="form-label">Email address</label>
+                                        <input type="email" class="form-control" id="emailAddress" placeholder="Enter Email Address"  name="email_address" required>
+                                        <div class="valid-feedback">
+                                        ✔
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Enter valid email address!
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <input type="hidden" id="send" name="sent_number"/> 
+                                <div class="col-12" style="text-align: center;">
+                                    <button type="submit" class="btn btn-primary" style="width:300px">ADD PARENT</button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                </form>
+            </div>
+            <!-- Wizard tab pane item 2 Add Teacher-->
+            <div class="tab-pane py-1 py-xl-10 fade" id="wizard2" role="tabpanel" aria-labelledby="wizard2-tab">
+                <form action="/admin/add-teacher" method="post" class="needs-validation" novalidate>
+                    <div class="card">
+                        <div class="card-header">
+                            <h1>Add New Teacher</h1>
+                        </div>
+                        <div class="card-body">
+                            <div class="row gy-3">
+                            <div class="col-6">
+                                <div class="p-1   fields">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="First Name"  name="first_name" required>
+                                    <div class="valid-feedback">
+                                        ✔
+                                        </div>
+                                        <div class="invalid-feedback">
+                                        Enter First Name
+                                        </div>
+                                </div>
+                                </div>
+                                <div class="col-6">
+                                <div class="p-1  fields">
+                                    <label for="phoneNumber" class="form-label">Phone Number</label><br>
+                                    <input type="tel" class="form-control" id="phoneNumber1"  name="phone_number" required style="width:200px">
+                                    <div class="valid-feedback">
+                                        ✔
+                                        </div>
+                                        <div class="invalid-feedback">
+                                        Enter Phone Number
+                                        </div>
+                                    </div>
+                                </div>                                    
+                                <div class="col-6">
+                                <div class="p-1   fields"><label for="lastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="Last Name"  name="last_name" required>
+                                    <div class="valid-feedback">
+                                        ✔
+                                        </div>
+                                        <div class="invalid-feedback">
+                                        Enter Last Name
+                                        </div>
+                                </div>
+                                </div>                                    
+                                <div class="col-6">
+                                <div class="p-1   fields"> <label for="birthDate" class="form-label">Date of Birth</label>                                      
+                                    <input type="date" class="form-control" id="birthDate" name="year_of_birth">
+                                    <div class="valid-feedback">
+                                        ✔
+                                        </div>
+                                    <div class="invalid-feedback">
+                                        Please Select your birth date!
+                                        </div>
+                                </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-1   fields"><label for="lastName" class="form-label">Other Names</label>
+                                        <input type="text" class="form-control" id="otherName" placeholder="Other Names"  name="other_names">                                        
+                                    </div>
+                                    </div> 
+                                <div class="col-6">
+                                    <div class="p-1   fields">
+                                    <label for="emailAddress" class="form-label">Email address</label>
+                                        <input type="email" class="form-control" id="emailAddress" placeholder="Enter Email Address"  name="email_address" required>
+                                        <div class="valid-feedback">
+                                        ✔
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Enter valid email address!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-1   fields">                                       
+                                        <label for="genderType" class="form-label">Gender</label>
+                                        <select class="form-select" id="genderType" aria-label="Floating label select example" name="teacher_gender" required>
+                                            <option selected>Select Teachers's Gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>                                                                                    
+                                            <option value="other">Other</option>  
+                                            
+                                          </select> 
+                                        <div class="valid-feedback">
+                                          ✔
+                                          </div>
+                                        <div class="invalid-feedback">
+                                            Please Select your Gender!
+                                          </div>
+                                    </div>
+                                </div>
+                               
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <input type="hidden" id="send1" name="sent_number"/> 
+                                <div class="col-6 py-4" style="text-align: center;">
+                                    <div class="p-1   fields">
+                                    <button type="submit" class="btn btn-primary " style="width:300px">ADD TEACHER</button>
+                                </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                </form>
+            </div>
+            <!-- Wizard tab pane item 3 Add Student-->
+            <div class="tab-pane py-1 py-xl-10 fade" id="wizard3" role="tabpanel" aria-labelledby="wizard3-tab">
+                <form action="/admin/add-student" method="post" class="needs-validation" novalidate>
+                    <div class="card">
+                        <div class="card-header">
+                            <h1>Add New Student</h1>
+                        </div>
+                        <div class="card-body">
+                            <div class="row gy-3">
+                                <div class="col-6">
+                                    <div class="p-1   fields">
+                                        <label for="admNo" class="form-label">Admission Number</label>
+                                        <input type="text" class="form-control" id="admNo" placeholder="Admission Number"  name="adm_no" required>
+                                        <div class="valid-feedback">
+                                            ✔
+                                            </div>
+                                            <div class="invalid-feedback">
+                                            Enter Student's Admission Number
+                                            </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="p-1   fields"> <label for="birthDate" class="form-label">Date of Birth</label>                                      
+                                            <input type="date" class="form-control" id="birthDate" name="year_of_birth">
+                                            <div class="valid-feedback">
+                                                ✔
+                                                </div>
+                                            <div class="invalid-feedback">
+                                                Please Select your birth date!
+                                                </div>
+                                        </div>
+                                        </div>
+                            <div class="col-6">
+                                <div class="p-1   fields">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="First Name"  name="first_name" required>
+                                    <div class="valid-feedback">
+                                        ✔
+                                        </div>
+                                        <div class="invalid-feedback">
+                                        Enter First Name
+                                        </div>
+                                </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-1   fields"> <label for="joinedDate" class="form-label">Date Joined</label>                                      
+                                        <input type="date" class="form-control" id="joinedDate" name="date_joined">
+                                        <div class="valid-feedback">
+                                            ✔
+                                            </div>
+                                        <div class="invalid-feedback">
+                                            Please Select join date!
+                                            </div>
+                                    </div>
+                                    </div>                                   
+                                <div class="col-6">
+                                <div class="p-1   fields"><label for="lastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="Last Name"  name="last_name" required>
+                                    <div class="valid-feedback">
+                                        ✔
+                                        </div>
+                                        <div class="invalid-feedback">
+                                        Enter Last Name
+                                        </div>
+                                </div>
+                                </div>                                    
+                                <div class="col-6">
+                                    <div class="p-1   fields"> 
+                                        
+                                        <label for="studentGender" class="form-label">Gender</label>
+                                        <select class="form-select" id="studentGender" aria-label="Floating label select example" name="student_gender" required>
+                                            <option selected>Select Student's Gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>                                                                                    
+                                            <option value="other">Other</option>  
+                                            
+                                          </select> 
+                                        <div class="valid-feedback">
+                                          ✔
+                                          </div>
+                                        <div class="invalid-feedback">
+                                            Please Select your Gender!
+                                          </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-1   fields">
+                                        <label for="kcpeResults" class="form-label">KCPE Results</label>
+                                        <input type="text" class="form-control" id="kcpeResults" placeholder="KCPE Marks"  name="kcpe_results" required>
+                                        <div class="valid-feedback">
+                                            ✔
+                                            </div>
+                                          <div class="invalid-feedback">
+                                              Please Enter Student's KCPE Results!
+                                            </div>
+                                    </div>
+                                    </div> 
+                                <div class="col-6">
+                                    <div class="p-1   fields">
+                                        <label for="studentParent" class="form-label">Parent</label>
+                                        <select class="form-select" id="studentParent" aria-label="Floating label select example" name="student_parent" required>
+                                            <option selected>Select Student's Parent</option>
+                                            <% parents.forEach((parent)=>{%>
+                                            <option value="<%=parent.id %> "><%= `${parent.first_name} ${parent.last_name}` %>  </option>
+                                            <%}) %> 
+                                          </select> 
+                                        <div class="valid-feedback">
+                                          ✔
+                                          </div>
+                                        <div class="invalid-feedback">
+                                            Please Select Student's Parent!
+                                          </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-1   fields"> 
+                                        <label for="dormAllocated" class="form-label">Dorm</label>
+                                        <select class="form-select" id="dormAllocated" aria-label="Floating label select example" name="student_dorm" required>
+                                            <option selected>Select Dorm Allocated</option>
+                                                <% dorms.forEach((dorm)=>{%>
+                                            <option value="<%= dorm.id %>"><%= dorm.dorm_name %>  </option>
+                                            <%}) %> 
+                                          </select>                                        
+                                        <div class="valid-feedback">
+                                          ✔
+                                          </div>
+                                        <div class="invalid-feedback">
+                                            Please Select Student's Dorm!
+                                          </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="p-1   fields">
+                                        <label for="streamAllocated" class="form-label">Stream</label>
+                                        <select class="form-select" id="streamAllocated" aria-label="Floating label select example" name="student_stream" required>
+                                            <option selected>Select Stream Allocated</option>
+                                            <% streams.forEach((stream)=>{%>
+                                            <option value="<%= stream.id %>"><%= stream.name %></option>
+                                            <%}) %> 
+                                          </select> 
+                                        <div class="valid-feedback">
+                                          ✔
+                                          </div>
+                                        <div class="invalid-feedback">
+                                            Please Select Student's Stream!
+                                          </div>
+                                    </div>
+                                </div>
+                                
+                               
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">                                
+                                <div class="col-12" style="text-align: center;">
+                                    <div class="p-1   fields">
+                                    <button type="submit" class="btn btn-primary " style="width:300px">ADD STUDENT</button>
+                                </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                </form>
+            </div>
+            <!-- Wizard tab pane item 4 Bul Update specific table-->
+            <div class="tab-pane py-1 py-xl-10 fade" id="wizard4" role="tabpanel" aria-labelledby="wizard4-tab">
+                <form action="/admin/bulk-update" method="post">
+                <div class="col-4">
+                    <div class="input-group ">
+                        <label class="input-group-text" for="inputGroupSelect01">Exam Type</label>
+                        <select class="form-select" id="inputGroupSelect01" name="selectedTable">
+                        <option selected>Select Table To Update</option>            
+                        <option value="parents_table">Parents</option>
+                        <option value="students_table">Students</option>
+                        <option value="teachers_table">Teachers</option>
+                        <option value="subjects_table">Subjects</option>
+                        <option value="dorms_table">Dorms</option>                                              
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="col-4">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect01">Choose File</label>
+                        <select class="form-select" id="inputGroupSelect01" name="selectedItem">
+                          <option>Select a File</option>
+                          <%for(let i=0;i<files.length;i++){%>
+                          <option value="<%=files[i]%>"><%=files[i]%></option>
+                          <%}%>
+                        </select>
+                      </div>
+                </div>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <br>
+                <button type="submit" class="btn btn-primary">UPDATE TABLE</button>
+            </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    <br>
+
+    
+</div>
+<%- include('../partials/footer.ejs') %> 

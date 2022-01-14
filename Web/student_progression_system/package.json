@@ -1,0 +1,39 @@
+{
+  "name": "student_progression_system",
+  "version": "1.0.0",
+  "description": "\"Provides school administrators functionality to upload students results,manage users,show fee payment history and school related news\"",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Bruno",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "convert-excel-to-json": "^1.7.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "csurf": "^1.11.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "express-session": "^1.17.2",
+    "firebase": "^9.4.0",
+    "firebase-admin": "^10.0.0",
+    "http-errors": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3-rc.0",
+    "pdf": "^0.1.0",
+    "pdfkit": "^0.13.0",
+    "sequelize": "^6.9.0",
+    "swup": "^2.0.14",
+    "twilio": "^3.72.0",
+    "url": "^0.11.0",
+    "uuid-v4": "^0.1.0"
+  }
+}

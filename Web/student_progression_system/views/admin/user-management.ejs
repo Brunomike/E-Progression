@@ -1,0 +1,421 @@
+<%- include('../partials/header.ejs') %> 
+<%- include('../partials/date.ejs') %> 
+<div class="container-fluid px-4">               
+    <br>
+    <div class="card">
+        <div class="card-header border-bottom">
+                <div class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard" id="cardTab" role="tablist">
+                    <!-- Wizard navigation item 1-->
+                    <a class="nav-item nav-link active" id="wizard1-tab" href="#wizard1" data-bs-toggle="tab" role="tab" aria-controls="wizard1" aria-selected="true">                                                
+                        <div class="wizard-step-icon"><i class="bi bi-kanban-fill"></i></div>
+                        <div class="wizard-step-text">
+                    <div class="wizard-step-text-name">Manage Users</div>
+                    <!-- <div class="wizard-step-text-details">Credit card information</div> -->
+                    </div>                        
+                    </a>
+                  <!-- Wizard navigation item 2-->
+                <a class="nav-item nav-link" id="wizard2-tab" href="#wizard2" data-bs-toggle="tab" role="tab" aria-controls="wizard2" aria-selected="false">
+                <div class="wizard-step-icon"><i class="bi bi-plus-square-fill"></i></div>
+                <div class="wizard-step-text">
+                    <div class="wizard-step-text-name">New User</div>
+                    <div class="wizard-step-text-details">Add new user</div>
+                </div>
+                </a>
+                <!-- <a class="nav-item nav-link" id="wizard3-tab" href="#wizard3" data-bs-toggle="tab" role="tab" aria-controls="wizard3" aria-selected="false">
+                    <div class="wizard-step-icon">3</div>
+                    <div class="wizard-step-text">
+                        <div class="wizard-step-text-name">Preferences</div>
+                        <div class="wizard-step-text-details">Notification and account options</div>
+                    </div>
+                </a> -->
+                </div>
+        </div>
+        <div class="card-body">
+            <div class="tab-content" id="cardTabContent">
+                <!-- Wizard tab pane item 1-->
+                <div class="tab-pane py-1 py-xl-10 fade active show" id="wizard1" role="tabpanel" aria-labelledby="wizard1-tab">
+                    <div class="card mb-4 "> 
+                        <!-- <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Users DataTable
+                        </div> -->
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Full Names</th>
+                                        <th>Email Address</th>
+                                        <th>Phone Number</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                        <th>Age</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>             
+                                <tbody>
+                                    <% for(let i=0;i<users.length;i++){%>                          
+                                        <tr>                      
+                                          <td><%= `${users[i].first_name} ${users[i].last_name} ` %></td>
+                                          <td><%= users[i].email_address%></td>
+                                          <td><%= users[i].phone_number%></td>
+                                          <td><%= users[i].user_role%></td>
+                                          <td><%= users[i].user_status%></td>  
+                                          <% let dateString = users[i].year_of_birth%>                         
+                                          <td class="dob">
+                                            <%function getDate(dateString){%>
+                                                <%  let dateStr = dateString%>
+                                                <%let d=new Date(dateStr).toISOString()%>
+                                                <%let n=d.split("T")%>
+                                                <%let date=n[0]%>
+                                                <%return date%>
+                                                <%}%>
+                                            
+                                            <%function calculateAge(dob){%>
+                                               <% var dob = new Date(dob); %>                                 
+                                               <% var month_diff = Date.now() - dob.getTime();%>
+                                               <% var age_dt = new Date(month_diff);%>                                                         
+                                               <% var year = age_dt.getUTCFullYear(); %>                                  
+                                               <% var age = Math.abs(year - 1970); %>                                                                                              
+                                               <% return age;%>
+                                            <% } %>                               
+                                              <%=calculateAge(dateString)%>
+                                            </td>
+                                            <td style="width:200px;">                                                                                                                                                                
+                                                  <div class="row" >
+                                                    <div class="col">
+                                                        <a href="/user/view/<%= users[i].uuid%>"  value="" type="button" class="btn btn-light btn-small"><i class="bi bi-eye"></i> </a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <a href="/user/delete/<%= users[i].uuid%>"  type="button" class="btn btn-light btn-small"><i class="fas fa-trash-alt" style="color: rgb(207, 71, 71);"></i></a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="dropdown">                                            
+                                                                <a href="/user/more-actions/<%= users[i].uuid%>"id="dropdownMenuButton1" data-bs-toggle="dropdown"  type="button" class="btn btn-light btn-small"><i class="bi bi-three-dots-vertical"></i></a>
+                                                            
+                                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                              <li>                                                                  
+                                                                  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#assignRole<%= users[i].uuid%>" data-bs-whatever="@mdo"><i class="fas fa-user-tag"></i><span style="margin-left: 10px; cursor: pointer;">Assign Role</span></a>
+                                                                </li>
+                                                              <li><a class="dropdown-item" href="/user/account-status/<%= users[i].uuid%>/<%= users[i].user_status%>">
+                                                                  <% if (users[i].user_status=="active") {%>
+                                                                    <i class="fas fa-toggle-on"></i>   
+                                                                    <span style="margin-left: 10px;">
+                                                                        Disable Account
+                                                                    </span> 
+                                                                  <%}else if(users[i].user_status=="disabled"){%>
+                                                                    <i class="fas fa-toggle-off"></i>
+                                                                    <span style="margin-left: 10px;">
+                                                                        Activate Account
+                                                                    </span>
+                                                                    <%}else{%>
+                                                                    <i class="fas fa-toggle-off"></i>
+                                                                    <span style="margin-left: 10px;">
+                                                                        Activate Account
+                                                                    </span> 
+                                                                  <%} %> 
+                                                                   
+                                                                
+                                                                </a>
+                                                                </li>
+                                                              <li>
+                                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#changePassword<%= users[i].uuid%>" data-bs-whatever="@mdo" href=""><i class="fas fa-key"></i><span style="margin-left: 10px;">Change Password</span></a>                                                              
+                                                            </li>                                              
+                                                            </ul>
+                                                          </div>
+                                                    </div>
+                                                                                                                                                    
+                                                </div>
+                                                <div class="modal fade" id="changePassword<%= users[i].uuid%>" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                        <div class="modal-header">
+                                                          <h5 class="modal-title" id="exampleModalLabel1">Change Password</h5>
+                                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">                                  
+                                                         <form action="/user/change-password/<%= users[i].uuid %> " method="post" class="needs-validation" novalidate id="pass<%= users[i].uuid %> ">
+                                                            <div class="mb-3">
+                                                                <label for="password" class="form-label">Password</label>
+                                                                <div class="input-group">
+                                                                    <input type="password" class="form-control passwordC"   name="user_password" required>
+                                                                    <span class="input-group-text" id="basic-addon3" style="height:48px; cursor: pointer;"><i class="bi bi-eye-slash togglePasswordC"></i></span>
+                                                                </div>
+                                                              </div>
+                                                              <div class="mb-3">
+                                                                  <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                                                  <input type="password" class="form-control confirmPasswordC " name="user_confirm_password" required>
+                                                                </div>                                                                
+                                                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">                                                             
+                                                                <div class="modal-footer">
+                                                                    <a onclick="document.getElementById(`pass<%= users[i].uuid%>`).submit()"> <button class="btn btn-primary">Change</button></a>
+                                                                    <a href="/admin/user-management"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>                                    </a>
+                                                                  </div>
+                                                         </form>                                                                                                                
+                                                        </div>                                                                                                
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                            
+                                                  <div class="modal fade" id="assignRole<%= users[i].uuid%>" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                        <div class="modal-header">
+                                                          <h5 class="modal-title" id="exampleModalLabel1">Select Role</h5>
+                                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">                                  
+                                                         <form action="/user/assign-role/<%= users[i].uuid %>" method="post" class="needs-validation" novalidate id="role<%= users[i].uuid %> ">
+                                                            <div class="mb-3">
+                                                                <label for="roleType" class="form-label">Role</label>
+                                                                <div class="form-floating">
+                                                                <select  list="role" class="form-select roleType" placeholder="Select Role"  name="user_role" required>
+                                                                <datalist id="role">
+                                                                    <option value="admin">admin</option>
+                                                                    <option value="parent">parent</option>
+                                                                </datalist>
+                                                            </div>
+                                                                <div class="valid-feedback">
+                                                                ✔
+                                                                </div>
+                                                                <div class="invalid-feedback">
+                                                                    Please Select a Role!
+                                                                </div>
+                                                              </div>
+                                                                                                                                                                                             
+                                                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                                <div class="modal-footer">
+                                                                    <a onclick="document.getElementById(`pass<%= users[i].uuid%>`).submit()"> <button class="btn btn-primary">Change</button></a>
+                                                                    <a href="/admin/user-management"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>                                    </a>
+                                                                  </div>
+                                                         </form>
+                                                        </div>  
+                                                                                              
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                              </td>                              
+                                          <% } %> 
+                                          
+                                          </tr>                                         
+                                  
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    </div>  
+                    </div>
+                </div>
+                <!-- Wizard tab pane item 2-->
+                <div class="tab-pane py-1 py-xl-10 fade" id="wizard2" role="tabpanel" aria-labelledby="wizard2-tab">                    
+                    <div class="card" >
+                        <div class="card-header" style="background:white;">
+                            <h1>New User Registration</h1>                            
+                        </div>                        
+                        <div class="card-body">
+                            <form action="/admin/add-user" method="post" class="needs-validation" novalidate >                          
+                            
+                                <div class="row gy-3">
+                                    <div class="col-6">
+                                    <div class="p-1   fields">
+                                        <label for="firstName" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" placeholder="First Name"  name="first_name" required>
+                                        <div class="valid-feedback">
+                                            ✔
+                                            </div>
+                                            <div class="invalid-feedback">
+                                            Enter First Name
+                                            </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-6">
+                                    <div class="p-1  fields">
+                                        <label for="phoneNumber" class="form-label">Phone Number</label><br>
+                                        <input type="tel" class="form-control" id="phoneNumber"  name="phone_number" required style="width:200px">
+                                        <div class="valid-feedback">
+                                            ✔
+                                            </div>
+                                            <div class="invalid-feedback">
+                                            Enter Phone Number
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                    <div class="col-6">
+                                    <div class="p-1   fields"><label for="lastName" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" placeholder="Last Name"  name="last_name" required>
+                                        <div class="valid-feedback">
+                                            ✔
+                                            </div>
+                                            <div class="invalid-feedback">
+                                            Enter Last Name
+                                            </div>
+                                    </div>
+                                    </div>                                    
+                                    <div class="col-6">
+                                    <div class="p-1   fields"> <label for="birthDate" class="form-label">Date of Birth</label>                                      
+                                        <input type="date" class="form-control" id="birthDate" name="year_of_birth">
+                                        <div class="valid-feedback">
+                                            ✔
+                                            </div>
+                                        <div class="invalid-feedback">
+                                            Please Select your birth date!
+                                            </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="p-1   fields">
+                                        <label for="emailAddress" class="form-label">Email address</label>
+                                            <input type="email" class="form-control" id="emailAddress" placeholder="Enter Email Address"  name="email_address" required>
+                                            <div class="valid-feedback">
+                                            ✔
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Enter valid email address!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">  
+                                        <div class="p-1   fields"> <label for="statusType" class="form-label">User Status</label>
+                                            <input type="text" list="status" class="form-control" id="statusType" placeholder="Select Status"  name="user_status" required>
+                                            <datalist id="status">
+                                                <option>active</option>
+                                                <option>disabled</option>                                                                                                                                                                                                                      
+                                            </datalist>
+                                            <div class="valid-feedback">
+                                            ✔
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please Select a Status!
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-6">  
+                                        <div class="p-1   fields"> <label for="roleType" class="form-label">Role</label>
+                                            <input type="text" list="role" class="form-control" id="roleType" placeholder="Select Role"  name="user_role" required>
+                                            <datalist id="role">
+                                                <option>admin</option>
+                                                <option>parent</option>                                                                                                                                                                                  
+                                            </datalist>
+                                            <div class="valid-feedback">
+                                            ✔
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please Select a Role!
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-6">
+                                        <div class="p-1   fields"> 
+                                        <label class="form-label" for="password1">Password </label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="password1" name="user_password" placeholder="Password" aria-describedby="basic-addon3" required>
+                                            <span class="input-group-text" id="basic-addon3" style="height:38px; cursor: pointer;"><i class="bi bi-eye-slash" id="togglePassword12"></i></span>
+                                        </div>
+                                            <div class="valid-feedback">
+                                            ✔
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Enter your password!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">  
+                                        <div class="p-1   fields"> <label for="genderType" class="form-label">Gender</label>
+                                            <input type="text" list="gender" class="form-control" id="genderType" placeholder="Select Gender"  name="user_gender" required>
+                                            <datalist id="gender">
+                                                <option>Male</option>
+                                                <option>Female</option>                                                                                    
+                                                <option>Other</option>                                                                                    
+                                            </datalist>
+                                            <div class="valid-feedback">
+                                            ✔
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please Select your Gender!
+                                            </div>
+                                        </div>
+                                    </div>                                                                                                                 
+                                    <div class="col-6">
+                                    <div class="p-1   fields">   
+                                        <label class="form-label" for="confirmPassword1">Confirm Password</label>                                        
+                                        <input type="password" class="form-control" id="confirmPassword1" name="user_confirm_password" placeholder="Confirm Password" aria-describedby="basic-addon3" required>
+                                        <div class="valid-feedback">
+                                            ✔
+                                            </div>
+                                        <div class="invalid-feedback">
+                                            Please confirm your password!
+                                            </div>
+                                    </div>
+                                    </div>                              
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <input type="hidden" id="send" name="sent_number"/> 
+                                    <div class="col-12" style="text-align: center;">
+                                        <button type="submit" class="btn btn-primary" style="width:300px">CREATE ACCOUNT</button>
+                                    </div>
+                                
+                                </div>                                                                                            
+                        </form>
+                        <script>            
+                            //Toggle password visibility register new user page
+                            const togglePassword1 = document.querySelector("#togglePassword12");
+                            const password=document.body.querySelector('#password1');
+                            const confirmPassword=document.body.querySelector('#confirmPassword1');
+                           
+                               togglePassword1.addEventListener('click', (e) =>{                                              
+                                   const pass1=password.getAttribute('type') === 'password' ? 'text' : 'password';
+                                   password.setAttribute('type',pass1);
+                                   const pass2=confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';                                   
+                                   confirmPassword.setAttribute('type',pass2);
+                                   togglePassword1.classList.toggle('bi-eye')                  
+                           })
+                                   </script>
+                        </div>
+                      </div>
+                 
+                </div>
+                    
+                
+                <!-- Wizard tab pane item 3-->
+            </div>
+        </div>
+       
+    
+</div>
+<script>
+    //Toggle password visibility change user password
+               const togglePasswordC = document.querySelectorAll(".togglePasswordC");
+               const passwordC=document.querySelectorAll('.passwordC');
+               const confirmPasswordC=document.querySelectorAll('.confirmPasswordC');               
+
+               
+            for (let i = 0; i < togglePasswordC.length; i++) {   
+                //console.log(togglePasswordC[i]);             
+                    togglePasswordC[i].addEventListener('click',(e)=>{
+                        console.log("Clicked");
+                            const pass1=passwordC[i].getAttribute('type') === 'password' ? 'text' : 'password';
+                            passwordC[i].setAttribute('type',pass1);
+                            const pass2=confirmPasswordC[i].getAttribute('type') === 'password' ? 'text' : 'password';                                   
+                            confirmPasswordC[i].setAttribute('type',pass2);
+                            togglePasswordC[i].classList.toggle('bi-eye') 
+                    })
+            }
+            console.log(togglePasswordC);
+           
+            //    togglePasswordC.forEach((element,index)=>{                                    
+            //     element.addEventListener('click', (e) =>{     
+            //            console.log("cLICKED");                                                                                   
+            //                const pass1=passwordC[index].getAttribute('type') === 'password' ? 'text' : 'password';
+            //                passwordC[index].setAttribute('type',pass1);
+            //                const pass2=confirmPasswordC[index].getAttribute('type') === 'password' ? 'text' : 'password';                                   
+            //                confirmPasswordC[index].setAttribute('type',pass2);
+            //                togglePasswordC[index].classList.toggle('bi-eye')                  
+            //        })
+            //     //    console.log(element);
+            //     //    console.log(index);
+            //     //    console.log(passwordC[index]);
+            //     //    console.log(confirmPasswordC[index]);
+            //    })
+</script>
+<br>
+</div>
+<%- include('../partials/footer.ejs') %> 

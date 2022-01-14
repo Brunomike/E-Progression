@@ -1,0 +1,71 @@
+<%- include('../partials/header.ejs') %> 
+<%- include('../partials/date.ejs') %> 
+<div class="container-fluid px-4"> 
+    <br>
+    <form action="/admin/files/add" method="post" enctype="multipart/form-data">   
+      <div class="mb-3">          
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">        
+        <input type="file" multiple class="form-control"  name="sentFiles">        
+      </div>                                       
+      <button type="submit" class="btn btn-primary">Upload Files</button>
+    </form> 
+<br>
+<div class="wrapper1">
+      <% for(i=0; i<files.length;i++){ %> 
+        <!-- <div class="container">
+          <div class="row align-items-center">                  -->            
+
+            <div>                
+        <% let fileArray=files[i].split('.') %>         
+        <% if(fileArray[1]=="xlsx") {%>           
+              <div class="fileWithAction">                
+                <img src="/assets/img/excel.png" class="img-thumbnail" alt="..." width="245px" height="200px">
+                <div class="d-flex justify-content-between file-name" >
+                  <%if (files[i].length > 25) {%>
+                    <p class="file-title"><%= files[i].substring(0,21)+"..." %> </p>                      
+                  <%}else{%>
+                    <p class="file-title"><%= files[i] %> </p>
+                    <% } %>
+                  <a href="/admin/files/delete/<%= files[i] %>" style="color: black;"><i class="bi bi-trash-fill" style=" cursor: pointer;" onMouseOver="this.style.color='red'"onMouseOut="this.style.color='black'"></i>                  </a>
+                </div>                
+                         
+            </div>                 
+          <% }else if(fileArray[1]=="png"){ %>             
+              <div class="fileWithAction">                                 
+                    <img src="/uploads/<%= files[i] %>" class="img-thumbnail" alt="..." width="245px" height="200px">                         
+                <div class="d-flex justify-content-between file-name" >
+                  <%if (files[i].length > 25) {%>
+                    <p class="file-title"><%= files[i].substring(0,21)+"..." %> </p>                      
+                  <%}else{%>
+                    <p class="file-title"><%= files[i] %> </p>
+                    <% } %>
+                  <a href="/admin/files/delete/<%= files[i] %>" style="color: black;"><i class="bi bi-trash-fill" style=" cursor: pointer;" onMouseOver="this.style.color='red'"onMouseOut="this.style.color='black'"></i></a>
+                </div>                
+                           
+            </div>
+            <% } else{%> 
+              
+                <div class="fileWithAction">                  
+                  <img src="/assets/img/logo.png" class="img-thumbnail" alt="..." width="245px" height="200px">
+                  <div class="d-flex justify-content-between file-name" >
+                    <%if (files[i].length > 25) {%>
+                      <p class="file-title"><%= files[i].substring(0,21)+"..." %> </p>                      
+                    <%}else{%>
+                      <p class="file-title"><%= files[i] %> </p>
+                      <% } %> 
+                    
+                    <a href="/admin/files/delete/<%= files[i] %>" style="color: black;"><i class="bi bi-trash-fill" style=" cursor: pointer;" onMouseOver="this.style.color='red'"onMouseOut="this.style.color='black'"></i></a>
+                  </div>                
+                </div>                
+                           
+              <% } %>                       
+      <br>
+    </div>
+  
+        <% } %> 
+      </div>      
+     
+  </div>
+  <br>
+
+<%- include('../partials/footer.ejs') %> 
