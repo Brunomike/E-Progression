@@ -6,35 +6,35 @@ The administrator can upload fee payment history of each student once their fees
 Parents who own the Parent Android Application will receive notifications of which exam has been released which can be viewed in the results screen, while those who do not own an account will receive SMS messages with detailed summary of their student's results
 
 
-<img src="images/loginpage.png" >
+<img src="Web/student_progression_system/images/loginpage.png" >
   
-<img src="images/passwordpage.png" >
+<img src="Web/student_progression_system/images/passwordpage.png" >
 
-<img src="images/registrationpage.png" >
+<img src="Web/student_progression_system/images/registrationpage.png" >
 
-<img src="images/homepage.png" >
+<img src="Web/student_progression_system/images/homepage.png" >
 
-<img src="images/adminpasspage.png" >
+<img src="Web/student_progression_system/images/adminpasspage.png" >
 
-<img src="images/editpage.png" >
+<img src="Web/student_progression_system/images/editpage.png" >
 
-<img src="images/userpage.png" >
+<img src="Web/student_progression_system/images/userpage.png" >
 
-<img src="images/filepage.png" >
+<img src="Web/student_progression_system/images/filepage.png" >
 
-<img src="images/newspage.png" >
+<img src="Web/student_progression_system/images/newspage.png" >
 
-<img src="images/datapage.png" >
+<img src="Web/student_progression_system/images/datapage.png" >
 
-<img src="images/financepage.png" >
+<img src="Web/student_progression_system/images/financepage.png" >
 
-<img src="images/addfinancerecords.png" >
+<img src="Web/student_progression_system/images/addfinancerecords.png" >
 
-<img src="images/academicpage.png" >
+<img src="Web/student_progression_system/images/academicpage.png" >
 
-<img src="images/reportspage.png" >
+<img src="Web/student_progression_system/images/reportspage.png" >
 
-<img src="images/sendexam.png" >
+<img src="Web/student_progression_system/images/sendexam.png" >
 
 
 
