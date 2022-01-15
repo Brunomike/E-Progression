@@ -7,17 +7,16 @@ Parents who own the Parent Android Application will receive notifications of whi
 
 
 <img src="Web/student_progression_system/images/loginpage.png" >
-  
 <img src="Web/student_progression_system/images/passwordpage.png" >
-
 <img src="Web/student_progression_system/images/registrationpage.png" >
 
+Admin Dashboard Home Page
 <img src="Web/student_progression_system/images/homepage.png" >
 
 <img src="Web/student_progression_system/images/adminpasspage.png" >
 
 <img src="Web/student_progression_system/images/editpage.png" >
-
+Admin Dashboard User Management Page
 <img src="Web/student_progression_system/images/userpage.png" >
 
 <img src="Web/student_progression_system/images/filepage.png" >
@@ -37,8 +36,6 @@ Parents who own the Parent Android Application will receive notifications of whi
 <img src="Web/student_progression_system/images/sendexam.png" >
 
 
-
-
 Parent Android Application Screenshots
 
 <div style="display:grid; grid-gap:5px;">  
@@ -50,4 +47,5 @@ Parent Android Application Screenshots
   <img src="Android/E-Progression/images/feesscreen.jpeg" width="300" >
   <img src="Android/E-Progression/images/newsscreen.jpeg" width="300" >
   <img src="Android/E-Progression/images/profilescreen.jpeg" width="300" >
+  <img src="Android/E-Progression/images/notification.jpeg" width="300" >
   </div>
