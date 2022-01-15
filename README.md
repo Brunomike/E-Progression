@@ -48,4 +48,5 @@ Parent Android Application Screenshots
   <img src="Android/E-Progression/images/newsscreen.jpeg" width="300" >
   <img src="Android/E-Progression/images/profilescreen.jpeg" width="300" >
   <img src="Android/E-Progression/images/notification.jpeg" width="300" >
+  <img src="Android/E-Progression/images/sms-example.jpeg" width="300" >
   </div>
